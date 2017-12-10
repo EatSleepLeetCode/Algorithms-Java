@@ -1,5 +1,5 @@
 
-public class MultiplyString 
+public class MultiplyStrings 
 {
    public String multiply(String num1, String num2) 
     {
@@ -49,7 +49,7 @@ public class MultiplyString
    
    public static void main(String[] args)
    {
-	   MultiplyString obj = new MultiplyString();
+	   MultiplyStrings obj = new MultiplyStrings();
 	   System.out.println(obj.multiply("25", "82"));
    }
 }
