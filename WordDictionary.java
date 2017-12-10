@@ -1,19 +1,8 @@
 
 public class WordDictionary 
 {
-	public static void main(String[] args)
-	{
-		WordDictionary obj = new WordDictionary();
-		obj.addWord("bad");
-		obj.addWord("dad");
-		obj.addWord("mad");
-		System.out.println(obj.search("pad"));
-		System.out.println(obj.search("bad"));
-		System.out.println(obj.search(".ad"));
-	}
-	
-	
     Trie trie;
+ 
     /** Initialize your data structure here. */
     public WordDictionary() 
     {
@@ -31,6 +20,18 @@ public class WordDictionary
     {
         return trie.search(word);
     }
+    
+	public static void main(String[] args)
+	{
+		WordDictionary obj = new WordDictionary();
+		obj.addWord("bad");
+		obj.addWord("dad");
+		obj.addWord("mad");
+		System.out.println(obj.search("pad"));
+		System.out.println(obj.search("bad"));
+		System.out.println(obj.search(".ad"));
+	}
+
 }
 
 class TrieNode
