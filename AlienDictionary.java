@@ -42,14 +42,14 @@ public class AlienDictionary
 	            }
 	        }
 	    }
-	    visited[i] = 2;                           // 2 = visited
+	    visited[i] = 2;                           	// 2 = visited
 	    sb.append((char) (i + 'a'));
 	    return true;
 	}
 	
 	public void buildGraph(String[] words, boolean[][] adj, int[] visited) 
 	{
-	    Arrays.fill(visited, -1);                 // -1 = not even existed
+	    Arrays.fill(visited, -1);                 	// -1 = not even existed
 	    
 	    for(int i = 0; i < words.length; i++) 
 	    {
@@ -60,7 +60,8 @@ public class AlienDictionary
 	        	
 	        if(i > 0) 
 	        {
-	            String w1 = words[i - 1], w2 = words[i];
+	            String w1 = words[i - 1];
+	            String w2 = words[i];
 	            int len = Math.min(w1.length(), w2.length());
 	            
 	            for(int j = 0; j < len; j++) 
