@@ -1,7 +1,7 @@
 
 public class PourWater 
 {
-    //We wanted to avoid writting very similar functions for
+    //We wanted to avoid writing very similar functions for
     //findLeft and findRight. Now we use loopDir to drive
     //the loops. The only extra thing we are doing is terminal
     //condition includes checking both i >= 0 && i < n.
