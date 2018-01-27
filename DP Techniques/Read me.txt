@@ -17,3 +17,5 @@ This approach uses memorization and we keep caching sub-results.
 4. Fourth approach is top down DP, where we start from bottom right i.e. 
 index [rows - 1, cols - 1] and go towards top left i.e. index [0, 0]. 
 This approach uses memorization and we keep caching sub-results.
+
+Note: Please refer to MinPathSum4Dir.java to know why DP won't for that problem.
