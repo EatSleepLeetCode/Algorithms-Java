@@ -117,7 +117,6 @@ public class MinPathSum4Dir
 		cache[row][col] = cmin;
 		return cmin;
 	}
-
 	
 	public static void main(String[] args) 
 	{
