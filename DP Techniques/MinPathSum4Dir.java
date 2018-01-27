@@ -127,8 +127,7 @@ public class MinPathSum4Dir
 			{31, 100, 65},
 			{10, 13, 47},
 			{99, 41, 20}};
-									
-									
+																		
 		System.out.println(obj.findMinSum(grid));
 		System.out.println(obj.findMinSumDP(grid));
 	}
