@@ -1,21 +1,20 @@
 import java.util.Arrays;
 
-public class TopDownDpWrongWay 
+public class TopDownDPWrongWay 
 {
 	int findMinSumTopDownDP(int[][] grid)
 	{
 		int rows = grid.length;
 		int cols = grid[0].length;
-		boolean[][] visited = new boolean[rows][cols];
 		int[][] cache = new int[rows][cols];
 		
 		for(int i = 0; i < rows; i++)
 			Arrays.fill(cache[i], -1);
 		
-		return helperDP(grid, cache, visited, 0, 0, rows, cols);
+		return helperDP(grid, cache, 0, 0, rows, cols);
 	}
 	
-	int helperDP(int[][] matrix, int[][] cache, boolean [][] visited, int row, int col, int rows, int cols)
+	int helperDP(int[][] matrix, int[][] cache, int row, int col, int rows, int cols)
 	{
 		if(cache[row][col] != -1)
 		{
@@ -27,8 +26,6 @@ public class TopDownDpWrongWay
 			return matrix[row][col];
 		}
 
-		visited[row][col] = true;
-		
 		int cmin = Integer.MAX_VALUE;
 		
 		for(int[] dir : new int[][] {{0, 1}, {1, 0}})
@@ -39,15 +36,14 @@ public class TopDownDpWrongWay
 			int updRow = row + incRow;
 			int updCol = col + incCol;
 			
-			if(updRow < 0 || updRow >= rows || updCol < 0 || updCol >= cols || visited[updRow][updCol])
+			if(updRow < 0 || updRow >= rows || updCol < 0 || updCol >= cols)
 			{
 				continue;
 			}
-			int sum = matrix[row][col] + helperDP(matrix, cache, visited, updRow, updCol, rows, cols);
+			int sum = matrix[row][col] + helperDP(matrix, cache, updRow, updCol, rows, cols);
 			cmin =  Math.min(cmin, sum);
 		}
 		
-		visited[row][col] = false;
 		cache[row][col] = cmin;
 		return cmin;
 	}
@@ -55,7 +51,7 @@ public class TopDownDpWrongWay
 	
 	public static void main(String[] args) 
 	{
-		TopDownDpWrongWay obj = new TopDownDpWrongWay();
+		TopDownDPWrongWay obj = new TopDownDPWrongWay();
 		
 		int[][] grid = new int[][]{
 									{31, 100, 65, 12, 18},
