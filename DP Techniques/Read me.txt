@@ -1,6 +1,6 @@
 These four programs solve the minimum path sum problem, where you can move in two directions i.e. left or down.
 
-1. First approach is naive recurrsion.
+1. First approach is naive recursion.
 
 2. Second approach is bottom up DP, where we start from top left i.e. index [0, 0] 
 and go towards bottom right i.e. index [rows - 1, cols - 1]. It uses tabulation 
