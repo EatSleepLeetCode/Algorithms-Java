@@ -1,5 +1,10 @@
 import java.util.Arrays;
 
+/*
+ * https://www.geeksforgeeks.org/minimum-cost-path-left-right-bottom-moves-allowed/
+ * https://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/
+ */
+
 public class MinPathSum4Dir 
 {
 	int min = Integer.MAX_VALUE;
