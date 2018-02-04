@@ -1,10 +1,14 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class AlienDictionary 
+public class AlienDictionary_v2 
 {
 	public String alienOrder(String[] words) 
 	{
-	    boolean[][] adj = new boolean[26][26];
+	    Map<Integer, Set<Integer>> adj = new HashMap<Integer, Set<Integer>>();
 	    int[] visited = new int[26];
 	    
 	    buildGraph(words, adj, visited);
@@ -24,30 +28,33 @@ public class AlienDictionary
 	    return sb.reverse().toString();
 	}
 	
-	public boolean dfs(boolean[][] adj, int[] visited, StringBuilder sb, int i) 
+	public boolean dfs(Map<Integer, Set<Integer>> adj, int[] visited, StringBuilder sb, int i) 
 	{
 	    visited[i] = 1;                            	// 1 = visiting
-	    for(int j = 0; j < 26; j++) 
+	    
+	    if(adj.containsKey(i))
 	    {
-	        if(adj[i][j])						    // connected 
-	        {                        
-	            if(visited[j] == 1)				    // 1 => 1, cycle 
+		    Set<Integer> adjList = adj.get(i);
+		    
+		    for(int j : adjList) 
+		    {
+	            if(visited[j] == 1)				   	// 1 => 1, cycle 
 	            	return false;     
-	            if(visited[j] == 0)					// 0 = unvisited 
+	            if(visited[j] == 0)					// 0 = unvisited - We only do DFS if visited[j] = 0
 	            {              
 	                if(!dfs(adj, visited, sb, j))
 	                {
 	                	return false;
 	                }
 	            }
-	        }
+		    }
 	    }
 	    visited[i] = 2;                           	// 2 = visited
 	    sb.append((char) (i + 'a'));
 	    return true;
 	}
 	
-	public void buildGraph(String[] words, boolean[][] adj, int[] visited) 
+	public void buildGraph(String[] words, Map<Integer, Set<Integer>> adj, int[] visited) 
 	{
 	    Arrays.fill(visited, -1);                 	// -1 = not even existed
 	    
@@ -66,12 +73,17 @@ public class AlienDictionary
 	            
 	            for(int j = 0; j < len; j++) 
 	            {
-	                char c1 = w1.charAt(j);
-	                char c2 = w2.charAt(j);
+	                int c1 = w1.charAt(j) - 'a';
+	                int c2 = w2.charAt(j) - 'a';
 	                
 	                if(c1 != c2) 
 	                {
-	                    adj[c1 - 'a'][c2 - 'a'] = true;
+	                	if(!adj.containsKey(c1))
+	                	{
+	                		adj.put(c1, new HashSet<Integer>());
+	                	}
+	                	
+	                	adj.get(c1).add(c2);
 	                    break;
 	                }
 	            }
@@ -81,7 +93,7 @@ public class AlienDictionary
 	
 	public static void main(String[] args)
 	{
-		AlienDictionary obj = new AlienDictionary();
+		AlienDictionary_v2 obj = new AlienDictionary_v2();
 		String[] words = new String[] {"wrt","wrf","er","ett","rftt"};
 		System.out.println(obj.alienOrder(words));
 	}
