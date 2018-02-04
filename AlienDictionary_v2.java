@@ -17,7 +17,7 @@ public class AlienDictionary_v2
 	    
 	    for(int i = 0; i < 26; i++) 
 	    {
-	        if(visited[i] == 0)						// unvisited 
+	        if(visited[i] == 0)						// 0 = unvisited 
 	        {                 
 	            if(!dfs(adj, visited, sb, i))
 	            {
