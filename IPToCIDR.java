@@ -31,16 +31,27 @@ public class IPToCIDR
         return result;
     }
 
-
     String longToIp(long num)
     {
+    	String mask = "";
+    	long result = 0;
+    	while(num > 0)
+    	{
+    		result = num % 256;
+    		mask = result + "." + mask;
+    		num = num >> 8;
+    	}
+    	return mask.substring(0, mask.length());
+    	
+/*					OR    	
         String mask1 = (num >> 24) + ".";
         String mask2 = (num >> 16) % 256 + ".";
         String mask3 = (num >> 8) % 256 + ".";
         String mask4 = num % 256 + "";
         return mask1 + mask2 + mask3 + mask4;
-    } 
-
+*/
+    }
+    
     int lowestOneBitPos(long num)
     {
         int result = 1;
@@ -63,7 +74,7 @@ public class IPToCIDR
     {
         int result = 0;
         if(num == 0)
-            return 1;
+            return 0;
 
         while(num > 0)
         {
@@ -76,7 +87,7 @@ public class IPToCIDR
 	public static void main(String[] args) 
 	{
 		IPToCIDR obj = new IPToCIDR();
-		obj.ipToCIDR("255.0.0.7", 10);
+		System.out.println(obj.ipToCIDR("255.0.0.7", 10));
 	}
 
 }
