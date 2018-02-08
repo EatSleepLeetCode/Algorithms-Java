@@ -49,7 +49,7 @@ public class WordBreakII
 		wordDict.add("sand");
 		wordDict.add("and");
 		wordDict.add("dogs");
-		obj.wordBreak("catsanddog", wordDict);
+		obj.wordBreak("catsanddogs", wordDict);
 	}
 
 }
