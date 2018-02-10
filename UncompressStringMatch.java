@@ -1,7 +1,6 @@
 
 public class UncompressStringMatch 
 {
-
 	boolean isMatch(String pattern, String str)
 	{
 		char[] pArr = pattern.toCharArray();
