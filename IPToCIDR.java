@@ -41,7 +41,7 @@ public class IPToCIDR
     		mask = result + "." + mask;
     		num = num >> 8;
     	}
-    	return mask.substring(0, mask.length());
+    	return mask.substring(0, mask.length() - 1);
     	
 /*					OR    	
         String mask1 = (num >> 24) + ".";
