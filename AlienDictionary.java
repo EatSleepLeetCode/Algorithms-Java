@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class AlienDictionary_v2 
+public class AlienDictionary 
 {
 	public String alienOrder(String[] words) 
 	{
@@ -38,15 +38,16 @@ public class AlienDictionary_v2
 		    
 		    for(int j : adjList) 
 		    {
-	            if(visited[j] == 1)				   	// 1 => 1, cycle 
+		    	if(visited[j] == 2)					//2 => completed already
+		    		continue;
+		    	
+	            if(visited[j] == 1)				   	// 1 => cycle 
 	            	return false;     
-	            if(visited[j] == 0)					// 0 = unvisited - We only do DFS if visited[j] = 0
-	            {              
-	                if(!dfs(adj, visited, sb, j))
-	                {
-	                	return false;
-	                }
-	            }
+	                          
+                if(!dfs(adj, visited, sb, j))		//only check if visited state is 0 i.e. in white set
+                {
+                	return false;
+                }
 		    }
 	    }
 	    visited[i] = 2;                           	// 2 = visited
@@ -93,7 +94,7 @@ public class AlienDictionary_v2
 	
 	public static void main(String[] args)
 	{
-		AlienDictionary_v2 obj = new AlienDictionary_v2();
+		AlienDictionary obj = new AlienDictionary();
 		String[] words = new String[] {"wrt","wrf","er","ett","rftt"};
 		System.out.println(obj.alienOrder(words));
 	}
