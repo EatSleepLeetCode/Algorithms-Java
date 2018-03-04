@@ -37,8 +37,8 @@ public class CustomerEmails
 		}
 		
 		List<List<String>> result = new ArrayList<List<String>>();
-		for(List<String> emails : emailMap.values())
-			result.add(emails);
+		for(List<String> customers : emailMap.values())
+			result.add(customers);
 		
 		return result;
 	}
