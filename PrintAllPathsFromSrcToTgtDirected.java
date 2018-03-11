@@ -64,6 +64,8 @@ public class PrintAllPathsFromSrcToTgtDirected
 		System.out.println(obj.allPathsSourceTarget(new int[][] {{1,2}, {3}, {3}, {}}));
 		//Input when cycle exists
 		System.out.println(obj.allPathsSourceTarget(new int[][] {{1,2}, {2,3}, {0,3}, {}}));
+		//Input when cycle exists
+		System.out.println(obj.allPathsSourceTarget(new int[][] {{1,2,3}, {3}, {0,1}, {}}));
 	}
 }
 
