@@ -23,7 +23,17 @@ public class WordLadderII
 
        dict.add(start);          
        bfs(start, end, dict, nodeNeighbors, distance);                 
-       dfs(start, end, dict, nodeNeighbors, distance, solution, res);   
+       /*
+       dfs1(start, end, dict, nodeNeighbors, distance, solution, res);
+       */
+       
+       // OR
+       
+       /**/
+       solution.add(start);
+       dfs2(start, end, dict, nodeNeighbors, distance, solution, res);
+       /**/
+       
        return res;
     }
 
@@ -94,7 +104,7 @@ public class WordLadderII
     }
 
     // DFS: output all paths with the shortest distance.
-    private void dfs(String cur, String end, Set<String> dict, HashMap<String, ArrayList<String>> nodeNeighbors, 
+    private void dfs1(String cur, String end, Set<String> dict, HashMap<String, ArrayList<String>> nodeNeighbors, 
                      HashMap<String, Integer> distance, ArrayList<String> solution, List<List<String>> res) 
     {
         solution.add(cur);
@@ -108,16 +118,38 @@ public class WordLadderII
            {            
                 if (distance.get(next) == distance.get(cur) + 1) 
                 {
-                     dfs(next, end, dict, nodeNeighbors, distance, solution, res);
+                     dfs1(next, end, dict, nodeNeighbors, distance, solution, res);
                 }
             }
         }           
        solution.remove(solution.size() - 1);
     }
     
+    
+    // DFS: output all paths with the shortest distance.
+    private void dfs2(String cur, String end, Set<String> dict, HashMap<String, ArrayList<String>> nodeNeighbors, 
+                     HashMap<String, Integer> distance, ArrayList<String> solution, List<List<String>> res) 
+    {
+        if (end.equals(cur)) 
+        {
+           res.add(new ArrayList<String>(solution));
+            return;
+        } 
+        
+       for (String next : nodeNeighbors.get(cur)) 
+       {            
+            if (distance.get(next) == distance.get(cur) + 1) 
+            {
+                solution.add(next);
+                dfs2(next, end, dict, nodeNeighbors, distance, solution, res);
+                solution.remove(solution.size() - 1);
+            }
+        }
+    }
+    
     public static void main(String[] args)
     {
     	WordLadderII obj = new WordLadderII();
-    	obj.findLadders("hit", "cog", new ArrayList<String>(Arrays.asList(new String[] {"hot","dot","dog","lot","log","cog"})));
+    	System.out.println(obj.findLadders("hit", "cog", new ArrayList<String>(Arrays.asList(new String[] {"hot","dot","dog","lot","log","cog"}))));
     }
 }
