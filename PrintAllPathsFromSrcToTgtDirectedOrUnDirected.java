@@ -120,5 +120,11 @@ class Graph
     {
         adj.putIfAbsent(u, new HashSet<Integer>());
         adj.get(u).add(v);
+        
+        //Uncomment to make it work for undirected graphs
+        /*
+        adj.putIfAbsent(v, new HashSet<Integer>());
+        adj.get(v).add(u);
+        */
     }
 }
