@@ -22,14 +22,13 @@ public class PrintAllPathsFromSrcToTgtDirected
         }
 
         List<Integer> curr = new ArrayList<Integer>();
+        curr.add(0);
         dfs(g, result, 0, n - 1, curr);
         return result;
     }
 
     void dfs(Graph g, List<List<Integer>> result, int src, int dest, List<Integer> curr)
     {
-        curr.add(src);
-
         if(src == dest)
         {
             result.add(new ArrayList<Integer>(curr));
@@ -42,6 +41,7 @@ public class PrintAllPathsFromSrcToTgtDirected
         {
             for(int neighbor : adjList)
             {
+                curr.add(neighbor);
                 dfs(g, result, neighbor, dest, curr);
                 curr.remove(curr.size() - 1);
             }
