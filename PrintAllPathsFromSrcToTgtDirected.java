@@ -45,7 +45,8 @@ public class PrintAllPathsFromSrcToTgtDirected
             	//We don't need a dedicated visited array, instead use curr to check it.
             	//Note: The below check is only required when cycle can exist in the graph.
             	//So, for a directed acyclic graph this check is not required; 
-            	//however, it's a good practice to always do this check.
+            	//however, it's a good practice to always do this check. Another, benefit is 
+            	//that with below condition, this solution will also work for undirected graph.
             	
             	if(curr.contains(neighbor))
             		continue;
