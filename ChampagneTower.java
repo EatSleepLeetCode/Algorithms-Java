@@ -2,13 +2,12 @@ public class ChampagneTower
 {
     public double champagneTower(int poured, int query_row, int query_glass) 
     {
-        //notice 102 X 102 instead of 101 X 101 (there are 101 rows)
-        double[][] glasses = new double[102][102]; 
+        double[][] glasses = new double[query_row + 1][query_row + 1]; 
         
         glasses[0][0] = (double)poured;
         double quantity = 0.0;
         
-        for(int row = 0; row <= query_row; row++)
+        for(int row = 0; row < query_row; row++)
         {
             for(int col = 0; col <= row; col++)
             {
