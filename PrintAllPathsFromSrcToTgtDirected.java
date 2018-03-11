@@ -23,12 +23,13 @@ public class PrintAllPathsFromSrcToTgtDirected
 
         List<Integer> curr = new ArrayList<Integer>();
         curr.add(0);
+        
         dfs(g, result, 0, n - 1, curr);
         return result;
     }
 
     void dfs(Graph g, List<List<Integer>> result, int src, int dest, List<Integer> curr)
-    {
+    {   	
         if(src == dest)
         {
             result.add(new ArrayList<Integer>(curr));
@@ -41,6 +42,14 @@ public class PrintAllPathsFromSrcToTgtDirected
         {
             for(int neighbor : adjList)
             {
+            	//We don't need a dedicated visited array, instead use curr to check it.
+            	//Note: The below check is only required when cycle can exist in the graph.
+            	//So, for a directed acyclic graph this check is not required; 
+            	//however, it's a good practice to always do this check.
+            	
+            	if(curr.contains(neighbor))
+            		continue;
+            	
                 curr.add(neighbor);
                 dfs(g, result, neighbor, dest, curr);
                 curr.remove(curr.size() - 1);
@@ -51,7 +60,10 @@ public class PrintAllPathsFromSrcToTgtDirected
 	public static void main(String[] args) 
 	{
 		PrintAllPathsFromSrcToTgtDirected obj = new PrintAllPathsFromSrcToTgtDirected();
+		//Input when cycle doesn't exist
 		System.out.println(obj.allPathsSourceTarget(new int[][] {{1,2}, {3}, {3}, {}}));
+		//Input when cycle exists
+		System.out.println(obj.allPathsSourceTarget(new int[][] {{1,2}, {2,3}, {0,3}, {}}));
 	}
 }
 
