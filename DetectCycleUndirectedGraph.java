@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,16 +27,12 @@ public class DetectCycleUndirectedGraph
 	}
 	
 	//Solution 2 - Using DFS
-	boolean detectCycle(Graph graph, Map<Integer, Boolean> visited)
+	boolean detectCycle(Graph graph)
 	{
+		Set<Integer> visited = new HashSet<Integer>();
 		for(int vertex : graph.vertices)
 		{
-			visited.put(vertex, false);
-		}
-		
-		for(int vertex : graph.vertices)
-		{
-			if(!visited.get(vertex))
+			if(!visited.contains(vertex))
 			{
 				if(detectCycleUtil(graph, visited, vertex, -1))
 					return true;
@@ -44,11 +41,11 @@ public class DetectCycleUndirectedGraph
 		return false;
 	}
 	
-	boolean detectCycleUtil(Graph graph, Map<Integer, Boolean> visited, int src, int pred)
+	boolean detectCycleUtil(Graph graph, Set<Integer> visited, int src, int pred)
 	{
-		visited.put(src, true);
+		visited.add(src);
 		
-		Set<Integer> neighbors = graph.adjList.get(src); 
+		Set<Integer> neighbors = graph.adj.get(src); 
 		
 		if(neighbors != null)
 		{
@@ -57,7 +54,7 @@ public class DetectCycleUndirectedGraph
 				if(succesor == pred)
 					continue;
 				
-				if(visited.get(succesor))
+				if(visited.contains(succesor))
 					return true;
 				
 				if(detectCycleUtil(graph, visited, succesor, src))
@@ -110,8 +107,35 @@ public class DetectCycleUndirectedGraph
 		graph.addEdge(4, 5);
 		graph.addEdge(5, 4);
 		
-		Map<Integer, Boolean> visited = new HashMap<Integer, Boolean>();		
-		System.out.println(obj.detectCycle(graph, visited));
+		System.out.println(obj.detectCycle(graph));
 	}
 }
-
+class Graph
+{
+	Set<Integer> vertices;
+	Map<Integer, Set<Integer>> adj;
+	
+	public Graph()
+	{
+		vertices = new HashSet<Integer>();
+		adj = new HashMap<Integer, Set<Integer>>();		
+	}
+	
+	void addEdge(int src, int dest)
+	{
+		vertices.add(src);
+		vertices.add(dest);
+		
+		if(!adj.containsKey(src))
+		{
+			adj.put(src, new HashSet<Integer>());
+		}
+		adj.get(src).add(dest);
+		
+		if(!adj.containsKey(dest))
+		{
+			adj.put(dest, new HashSet<Integer>());
+		}
+		adj.get(dest).add(src);
+	}
+}
