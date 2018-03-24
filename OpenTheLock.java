@@ -15,7 +15,6 @@ class OpenTheLock
         
         Queue<String> queue = new LinkedList<String>();
         queue.offer("0000");
-        queue.offer(null);
         
         Set<String> seen = new HashSet<String>();
         seen.add("0000");
@@ -24,38 +23,34 @@ class OpenTheLock
         
         while(!queue.isEmpty())
         {
-            String curr = queue.poll();
-            
-            if(curr == null)
-            {
-                depth++;
+        	depth++;
+        	int size = queue.size();
+        	
+        	for(int i = 0; i < size; i++)
+        	{
+                String curr = queue.poll();
                 
-                if(queue.peek() != null)
+                if(!dead.contains(curr))
                 {
-                    queue.offer(null);
-                }
-            }
-            else if(curr.equals(target))
-            {
-                return depth;
-            }
-            else if(!dead.contains(curr))
-            {
-                for(int pos = 0; pos < 4; pos++)
-                {
-                    for(int dir = -1; dir <= 1; dir = dir + 2)
+                    for(int pos = 0; pos < 4; pos++)
                     {
-                        int updPos = (int)(curr.charAt(pos) - '0' + dir + 10) % 10;
-                        String nei = curr.substring(0, pos) + updPos + curr.substring(pos + 1);
-                        
-                        if(!seen.contains(nei))
+                        for(int dir = -1; dir <= 1; dir = dir + 2)
                         {
-                            seen.add(nei);
-                            queue.offer(nei);
+                            int updPos = (int)(curr.charAt(pos) - '0' + dir + 10) % 10;
+                            String nei = curr.substring(0, pos) + updPos + curr.substring(pos + 1);
+                            
+                            if(nei.equals(target))
+                                return depth;
+                            
+                            if(!seen.contains(nei))
+                            {
+                                seen.add(nei);
+                                queue.offer(nei);
+                            }
                         }
                     }
                 }
-            }
+        	}
         }
         return -1;
     }
