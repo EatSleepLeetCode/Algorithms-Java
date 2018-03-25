@@ -18,10 +18,7 @@ public class PartitionEqualSubsetSum
         
         for(int i = 0; i <= n; i++)
             dp[i][0] = true;
-            
-        for(int j = 0; j <= sum; j++)
-            dp[0][j] = false;
-            
+                       
         for(int i = 1; i <= n; i++)
         {
             for(int j = 1; j <= sum; j++)
@@ -39,8 +36,8 @@ public class PartitionEqualSubsetSum
         
         return dp[n][sum];        
     }
-	    
-	public static void main(String[] args) 
+
+    public static void main(String[] args) 
 	{
 		PartitionEqualSubsetSum obj = new PartitionEqualSubsetSum();
 		int[] nums = new int[] {1,5,11,5};
