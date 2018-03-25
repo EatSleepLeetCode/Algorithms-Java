@@ -31,9 +31,10 @@ class IsSubsetSumPossible
 	{
 		int nums[] = {1, 4, 3, 2};
 		int sum = 8;
-		int n = nums.length;
 		
-		if (isSubsetSum(nums, n, sum) == true)
+		IsSubsetSumPossible obj = new IsSubsetSumPossible();
+		
+		if (obj.subsetSum(nums, sum) == true)
 			System.out.println("Found a subset with given sum");
 		else
 			System.out.println("No subset with given sum");
