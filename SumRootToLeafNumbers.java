@@ -5,7 +5,7 @@ import java.util.Queue;
 
 public class SumRootToLeafNumbers 
 {
-    //Solution 1
+    //Solution 1 
     public int sumNumbers1(TreeNode root) 
     {
         if(root == null)
