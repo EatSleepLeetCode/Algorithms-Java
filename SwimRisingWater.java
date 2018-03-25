@@ -13,6 +13,7 @@ public class SwimRisingWater
 	                grid[k1[0]][k1[1]] - grid[k2[0]][k2[1]]);
 	        
 	        pq.offer(new int[] {0, 0});
+	        visited[0][0] = true;
 	        int ans = 0;
 
 
