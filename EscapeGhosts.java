@@ -17,7 +17,8 @@ class EscapeGhosts
         return true;
     }
 	
-	//Solution 2 - DFS based
+	//Solution 2 - DFS based modified question
+    //Let's say we are given bounds for the grid, we assume them to be 20
 	
 	  int min = Integer.MAX_VALUE;
 	    
@@ -48,8 +49,6 @@ class EscapeGhosts
 	    {
 	        if(row == targetRow && col == targetCol)
 	        {
-	            time++;
-	            
 	            if(time <= min)
 	            {
 	                min = time;
@@ -74,17 +73,16 @@ class EscapeGhosts
 	        
 	        return true;
 	    }
-    
-    
+        
 	public static void main(String[] args) 
 	{
 		EscapeGhosts obj = new EscapeGhosts();
 		
-//		int[][] ghosts = new int[][] {{1, 0}, {0, 3}};
-//		int[] target = new int[] {0, 1};
+		int[][] ghosts = new int[][] {{1, 0}, {0, 3}};
+		int[] target = new int[] {0, 1};
 		
-		int[][] ghosts = new int[][] {{1, 0}};
-		int[] target = new int[] {2, 0};
+//		int[][] ghosts = new int[][] {{1, 0}};
+//		int[] target = new int[] {2, 0};
 		
 //		int[][] ghosts = new int[][] {{2, 0}};
 //		int[] target = new int[] {1, 0};
