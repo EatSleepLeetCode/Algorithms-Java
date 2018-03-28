@@ -10,6 +10,9 @@ public class LongestSubstringWithAtmostKDistinct
 		int counter= 0;
 		int[] map = new int[26];
 		
+		if(n == 0 || k <= 0)
+			return 0;
+		
 		while(right < n)
 		{
 			char ch = str.charAt(right);
