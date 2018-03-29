@@ -45,7 +45,7 @@ public class Excel
     Map<String, Integer> range = convertToMap(strs);
     int sum = getSum(row - 1, col - 'A', range);
     set(row, col, sum);
-    form[row - 1][col - 'A'] = new Cell(sum, range);
+    form[row - 1][col - 'A'] = new Cell(sum, range);	//We do this again because set(row, col, sum) would have reset the children.
     return sum;
   }
   
