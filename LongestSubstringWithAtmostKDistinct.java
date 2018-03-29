@@ -26,12 +26,13 @@ public class LongestSubstringWithAtmostKDistinct
 			
 			while(counter > k)
 			{
-				if(map[str.charAt(left) - 'a'] > 0)
+				map[str.charAt(left) - 'a']--;
+				
+				if(map[str.charAt(left) - 'a'] == 0)
 				{
-					map[str.charAt(left) - 'a']--;
-					if(map[str.charAt(left) - 'a'] == 0)
-						counter--;
+					counter--;
 				}
+				
 				left++;
 			}
 			
