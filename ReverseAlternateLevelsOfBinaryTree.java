@@ -1,8 +1,10 @@
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 class Node
@@ -21,30 +23,30 @@ public class ReverseAlternateLevelsOfBinaryTree
 	//Solution - 1
 	void reverseAlternate(Node node)
 	{
-		reverse(node.left,node.right,true);
+		reverse(node.left, node.right, true);
 	}
 	
 	void reverse(Node l, Node r, boolean flag)
 	{
-		if(l==null || r==null)
+		if(l == null || r == null)
 			return;
 		     
 		if(flag)
 			swap(l, r);
 		     
-		reverse(l.left,r.right,!flag); // swap value of 1st left subtree with right most e.g. d & g
-		reverse(l.right,r.left,!flag); //swap value of right subtree with left most of another subtree e.g. e and f 
+		reverse(l.left, r.right, !flag); // swap value of 1st left subtree with right most e.g. d & g
+		reverse(l.right, r.left ,!flag); // swap value of right subtree with left most of another subtree e.g. e and f 
 	}
 	 
-	void swap(Node left,Node right)
+	void swap(Node left, Node right)
 	{
-		char l=left.val;
-		left.val=right.val;
-		right.val=l;
+		char temp = left.val;
+		left.val = right.val;
+		right.val = temp;
 	}
 	
 	//Solution - 2
-	List<List<Character>> levels = new ArrayList<List<Character>>();
+	Map<Integer, List<Character>> levels = new HashMap<Integer, List<Character>>();
 	
 	void reverseAlternateLevels(Node root)
 	{
@@ -67,7 +69,7 @@ public class ReverseAlternateLevelsOfBinaryTree
 				Node curr = q.poll();
 				temp.add(curr.val);
 				
-				if(update)
+				if(update && level % 2 != 0)	//update only odd levels
 					curr.val = levels.get(level).get(i);
 				
 				if(curr.left != null)
@@ -80,9 +82,10 @@ public class ReverseAlternateLevelsOfBinaryTree
 			if(!update)
 			{
 				if(level % 2 != 0)				//bcoz we will reverse odd levels
+				{
 					Collections.reverse(temp);
-				
-				levels.add(level, temp);
+					levels.put(level, temp);
+				}
 			}
 			
 			level++;
@@ -148,7 +151,7 @@ public class ReverseAlternateLevelsOfBinaryTree
 		obj.reverseAlternate(root);
 		
 		//Solution 2 - This solution is better
-		obj.reverseAlternateLevels(root);
+//		obj.reverseAlternateLevels(root);
 		
 		System.out.println("\n New Tree, Alternate Levels Reversed..");
 		obj.levelOrderQueue(root);
