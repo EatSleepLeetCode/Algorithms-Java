@@ -13,7 +13,7 @@ public class MissingRanges
 			return result;
 		}
 		
-		if(lower > nums[0])
+		if(lower < nums[0])
 			addRange(result, lower, nums[0] - 1);
 		
 		for(int i = 1; i < n; i++)
@@ -39,6 +39,6 @@ public class MissingRanges
 	public static void main(String[] args) 
 	{
 		MissingRanges obj = new MissingRanges();
-		System.out.println(obj.findMissingRanges(new int[] {0, 1, 3, 50, 75}, 0, 99));
+		System.out.println(obj.findMissingRanges(new int[] {0, 1, 3, 50, 75}, 2, 99));
 	}
 }
