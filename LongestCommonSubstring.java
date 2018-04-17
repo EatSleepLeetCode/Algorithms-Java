@@ -12,13 +12,11 @@ public class LongestCommonSubstring
 	    int result = 0;  // To store length of the longest common substring
 	     
 	    // Following steps build lcs[m+1][n+1] in bottom up fashion
-	    for (int i = 0; i <= m; i++) 
+	    for (int i = 1; i <= m; i++) 
 	    {
-	        for (int j = 0; j <= n; j++) 
+	        for (int j = 1; j <= n; j++) 
 	        {
-	            if (i == 0 || j == 0)
-	            	lcs[i][j] = 0;
-	            else if (X[i - 1] == Y[j - 1])
+	            if (X[i - 1] == Y[j - 1])
 	            {
 	            	lcs[i][j] = lcs[i - 1][j - 1] + 1;
 	                result = Integer.max(result, lcs[i][j]);
