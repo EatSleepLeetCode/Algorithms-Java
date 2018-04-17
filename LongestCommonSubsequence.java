@@ -8,13 +8,11 @@ public class LongestCommonSubsequence
   
         // Following steps build L[m+1][n+1] in bottom up fashion. Note
         // that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1] 
-        for (int i = 0; i <= m; i++)
+        for (int i = 1; i <= m; i++)
         {
-            for (int j = 0; j <= n; j++)
+            for (int j = 1; j <= n; j++)
             {
-                if (i == 0 || j == 0)
-                	lcs[i][j] = 0;
-                else if (X.charAt(i - 1) == Y.charAt(j - 1))
+                if (X.charAt(i - 1) == Y.charAt(j - 1))
                 	lcs[i][j] = lcs[i - 1][j - 1] + 1;
                 else
                 	lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
@@ -48,7 +46,7 @@ public class LongestCommonSubsequence
   
             // If not same, then find the larger of two and
             // go in the direction of larger value
-            else if (lcs[i - 1][j] > lcs[i][j - 1])
+            else if (lcs[i][j] == lcs[i - 1][j])
                 i--;
             else
                 j--;
