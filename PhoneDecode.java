@@ -14,14 +14,14 @@ public class PhoneDecode
 	
 	int findWays(String input)
 	{
-		int result = 0;
+		int result = 1;
 		int[] digitMap = new int[] {1, 2, 3};
 		List<Integer> freqs = new ArrayList<Integer>();
 		compressString(input, freqs);
 		
 		for(int i = 0; i < freqs.size(); i++)
 		{
-			result += combinationSum(digitMap, freqs.get(i), 0);
+			result *= combinationSum(digitMap, freqs.get(i), 0);
 		}
 		return result;
 	}
@@ -65,6 +65,6 @@ public class PhoneDecode
 	public static void main(String[] args) 
 	{
 		PhoneDecode obj = new PhoneDecode();
-		System.out.println(obj.findWays("223334"));
+		System.out.println(obj.findWays("2233334"));
 	}
 }
