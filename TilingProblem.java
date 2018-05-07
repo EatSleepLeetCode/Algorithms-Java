@@ -4,14 +4,14 @@ public class TilingProblem
 	//Given 2 X n board and 2 X 1 tiles that can be rotated
 	int problem1DP(int n)
 	{
-		if(n <= 1)
+		if(n <= 2)
 			return n;
 		
 		int[] dp = new int[n + 1];
-		dp[0] = 1;
 		dp[1] = 1;
+		dp[2] = 2;
 		
-		for(int i = 2; i <= n; i++)
+		for(int i = 3; i <= n; i++)
 		{
 			dp[i] = dp[i - 1] + dp[i - 2];
 		}
@@ -25,10 +25,10 @@ public class TilingProblem
 			return n;
 		
 		int one = 1;
-		int two = 1;
+		int two = 2;
 		int three = 0;
 		
-		for(int i = 2; i <= n; i++)
+		for(int i = 3; i <= n; i++)
 		{
 			three = two + one;
 			one = two;
@@ -83,7 +83,7 @@ public class TilingProblem
 		System.out.println(obj.problem1DP(n));
 		System.out.println(obj.problem1Fibo(n));
 		
-		System.out.println(obj.problem2(n,4));
+		System.out.println(obj.problem2(10,6));
 		
 		System.out.println(obj.dominoTromino(4));		
 	}
