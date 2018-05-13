@@ -16,6 +16,7 @@ public class PrefixAndSuffixSearch
                 TrieNode cur = trie;
                 cur.weight = weight;
                 
+                //Trie word insertion is done as suffix + "{" + prefix
                 for (int j = i; j < 2 * word.length() - 1; j++) 
                 {
                     int k = word.charAt(j % word.length()) - 'a';
@@ -30,7 +31,7 @@ public class PrefixAndSuffixSearch
     public int f(String prefix, String suffix) 
     {
         TrieNode cur = trie;
-        for (char letter: (suffix + '{' + prefix).toCharArray()) 
+        for (char letter: (suffix + "{" + prefix).toCharArray()) 
         {
             if (cur.links[letter - 'a'] == null)
                 return -1;
