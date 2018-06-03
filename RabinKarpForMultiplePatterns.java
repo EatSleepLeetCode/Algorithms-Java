@@ -58,7 +58,7 @@ public class RabinKarpForMultiplePatterns
 		
 		for(int i = 0; i < len; i++)
 		{
-			hash += (int)(str.charAt(i) - 'a') * Math.pow(seed, i);
+			hash += (int)(str.charAt(i)) * Math.pow(seed, i);
 		}
 		
 		return hash;
@@ -66,9 +66,9 @@ public class RabinKarpForMultiplePatterns
 	
 	int computeRollingHash(String str, int offset, int len, int prevHash)
 	{
-		prevHash -= (int)(str.charAt(offset - 1) - 'a');
+		prevHash -= (int)(str.charAt(offset - 1));
 		prevHash /= seed;
-		prevHash += (int)(str.charAt(offset + len - 1)  - 'a') * Math.pow(seed, len - 1); 
+		prevHash += (int)(str.charAt(offset + len - 1)) * Math.pow(seed, len - 1); 
 		
 		return prevHash;
 	}
