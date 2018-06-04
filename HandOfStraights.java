@@ -19,7 +19,7 @@ public class HandOfStraights
             if (freq <= 0)
                 continue;
             
-            for (int i = W - 1; i >= 0; i --)
+            for (int i = 1; i < W; i++)
             {
                 if (map.getOrDefault(card + i, 0) < freq)
                 {
