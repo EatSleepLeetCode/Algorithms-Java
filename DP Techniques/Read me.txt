@@ -1,0 +1,21 @@
+These four programs solve the minimum path sum problem, where you can move in two directions i.e. left or down.
+
+1. First approach is naive recursion.
+
+2. Second approach is bottom up DP, where we start from top left i.e. index [0, 0] 
+and go towards bottom right i.e. index [rows - 1, cols - 1]. It uses tabulation 
+for caching sub-results.
+
+3. Third approach is top down DP; however, it's implemented incorrectly because 
+although it is top down and we started from index [0, 0], instead of 
+index [rows - 1, cols - 1]. 
+
+Please note that this implementation gives the correct result. However, as far as 
+top down technique is concerned this is not the right way of implementing it. 
+This approach uses memorization and we keep caching sub-results.
+
+4. Fourth approach is top down DP, where we start from bottom right i.e. 
+index [rows - 1, cols - 1] and go towards top left i.e. index [0, 0]. 
+This approach uses memorization and we keep caching sub-results.
+
+Note: Please refer to MinPathSum4Dir.java to know why DP won't for that problem.
