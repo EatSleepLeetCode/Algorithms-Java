@@ -22,7 +22,7 @@ public class RaceCar
             
             for(int i = 0; i < size; i++) 
             {
-                Node curr = queue.poll();                        // cur[0] is position; cur[1] is speed
+                Node curr = queue.poll();
 
                 if (curr.pos == target) 
                 {
@@ -50,6 +50,7 @@ public class RaceCar
         }
         return -1;
     }
+
 
 	public static void main(String[] args) 
 	{		
