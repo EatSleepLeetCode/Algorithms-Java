@@ -12,7 +12,8 @@ public class UniqueLetterString
         
         for (int i = 0; i < S.length(); i++)
         {
-            posMap.computeIfAbsent(S.charAt(i), x -> new ArrayList<Integer>()).add(i);  //Notice syntax, add is outside
+            //Notice syntax, add is outside
+            posMap.computeIfAbsent(S.charAt(i), x -> new ArrayList<Integer>()).add(i);  
         }
         
         for (List<Integer> vals : posMap.values())
