@@ -3,8 +3,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -69,7 +71,7 @@ class LoudAndRich
     }
     
     //Solution 2 - Using cached DFS for each person
-    public int[] loudAndRich(int[][] richer, int[] quiet) 
+    public int[] loudAndRich2(int[][] richer, int[] quiet) 
     {
         Map<Integer, List<Integer>> adj = new HashMap<Integer, List<Integer>>();
         int n = quiet.length;
@@ -117,6 +119,60 @@ class LoudAndRich
 
         return answer[src];
     }
+    
+    public int[] loudAndRich(int[][] richer, int[] quiet)
+    {
+    	int n = quiet.length;
+    	int[] answer = new int[n];
+    	
+    	Queue<Integer> queue = new LinkedList<Integer>();
+    	int[] richerCount = new int[n];
+    	List<Integer>[] dependencyGraph = new List[n];    	
+    	
+    	for (int i = 0; i < n; i++)
+    	{
+    		dependencyGraph[i] = new ArrayList<Integer>();
+    	}
+    	
+    	for (int i = 0; i < richer.length; i++)
+    	{
+    		richerCount[richer[i][1]]++;
+    		dependencyGraph[richer[i][0]].add(richer[i][1]);
+    	}
+    	
+    	for (int i = 0; i < n; i++)
+    	{
+    		answer[i] = i;
+    		
+    		if (richerCount[i] == 0)
+    		{
+    			queue.offer(i);
+    		}
+    	}
+    	
+    	while (!queue.isEmpty())
+    	{
+    		int curr = queue.poll();
+    		
+    		List<Integer> peoplePoorer = dependencyGraph[curr];
+    		
+    		for (int person : peoplePoorer)
+    		{
+    			richerCount[person]--;
+    			if (richerCount[person] == 0)
+    			{
+    				queue.offer(person);
+    			}
+    			
+				if (quiet[answer[person]] > quiet[answer[curr]])
+				{
+					answer[person] = answer[curr];
+				}
+    		}    		
+    	}
+    	return answer;
+    }
+    
     
 	public static void main(String[] args) 
 	{
