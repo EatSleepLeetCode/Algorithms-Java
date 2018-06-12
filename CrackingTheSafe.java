@@ -9,9 +9,6 @@ public class CrackingTheSafe
         StringBuilder sb = new StringBuilder();
         int target = (int)Math.pow(k, n);
         
-        if (n == 1 && k == 1)
-            return "0";        
-        
         for (int i = 0; i < n; i++)
             sb.append("0");
         
@@ -56,6 +53,6 @@ public class CrackingTheSafe
 	public static void main(String[] args) 
 	{
 		CrackingTheSafe obj = new CrackingTheSafe();
-		System.out.println(obj.crackSafe(2, 2));
+		System.out.println(obj.crackSafe(1, 1));
 	}
 }
