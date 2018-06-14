@@ -29,4 +29,17 @@ public class MinimumPathSumRootToLeaf
 	    
 	    return sum + Math.min(leftSum, rightSum);
 	}
+	
+	public static void main(String[] args)
+	{
+		MinimumPathSumRootToLeaf obj = new MinimumPathSumRootToLeaf();
+		TreeNode root = new TreeNode(10);
+		root.left = new TreeNode(6);
+		root.right = new TreeNode(7);
+		root.left.left = new TreeNode(2);
+		root.left.right = new TreeNode(4);
+		root.right.left = new TreeNode(1);
+		
+		System.out.println(obj.minPathSum(root));
+	}
 }
