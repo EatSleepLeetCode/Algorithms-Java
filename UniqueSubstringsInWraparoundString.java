@@ -5,7 +5,7 @@ public class UniqueSubstringsInWraparoundString
     {
         int[] count = new int[26];
         int result = 0;
-        int maxCurrLength = 0;
+        int maxCurrLength = 0;  // store longest contiguous substring ends at current position.
         
         for (int i = 0; i < p.length(); i++)
         {
@@ -27,5 +27,11 @@ public class UniqueSubstringsInWraparoundString
         }
         
         return result;
+    }
+    
+    public static void main(String[] args)
+    {
+    	UniqueSubstringsInWraparoundString obj = new UniqueSubstringsInWraparoundString();
+    	System.out.print(obj.findSubstringInWraproundString("cac"));
     }
 }
