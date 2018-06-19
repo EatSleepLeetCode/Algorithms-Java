@@ -28,16 +28,16 @@ public class MinimumTimeDifference
             {
                 if (first != Integer.MAX_VALUE)
                 {
-                    min = Math.min(min, i - prev);
+                    min = Math.min(min, i - prev);      //keep updating min difference
                 }
                 
-                first = Math.min(first, i);
-                last = Math.max(last, i);
+                first = Math.min(first, i);             //keep track of first existing time tick
+                last = Math.max(last, i);               //keep track of last existing time tick
                 prev = i;
             }
         }
         
-        min = Math.min(min, (24 * 60 - last + first));
+        min = Math.min(min, (24 * 60 - last + first));  //find difference between first and last
         
         return min;
     }
