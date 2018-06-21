@@ -11,7 +11,7 @@ public class FindKClosestElements
     	for (int num : arr)
     		myList.add(num);
         
-        Collections.sort(myList, (a, b) -> Integer.compare(a - x, b - x));
+        Collections.sort(myList, (a, b) -> Integer.compare(Math.abs(a - x), Math.abs(b - x)));
         
         myList = myList.subList(0, k);
         
