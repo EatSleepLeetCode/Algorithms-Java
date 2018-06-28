@@ -55,5 +55,6 @@ public class MagicDictionary
         System.out.println(obj.search("hhllo"));
         System.out.println(obj.search("hell"));
         System.out.println(obj.search("leetcoded"));
+        System.out.println(obj.search("leetcodd"));
     }
 }
