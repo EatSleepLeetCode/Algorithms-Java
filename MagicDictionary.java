@@ -27,7 +27,6 @@ public class MagicDictionary
         }
     }
     
-    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
     public boolean search(String word) 
     {
         for (int i = 0; i < word.length(); i++)
