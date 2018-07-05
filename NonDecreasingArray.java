@@ -35,10 +35,9 @@ class NonDecreasingArray
                 modified++;
 
                 if (i - 2 >= 0 && nums[i - 2] > nums[i])
-                    continue;
-                
-                prev = nums[i];
+                    continue;                
             }
+            prev = nums[i];
         }
         return true;
     }
