@@ -15,7 +15,7 @@ public class GetDataFromClosestYearIfNotPresent
 	void put(int year, int valObj)
 	{
 		yearMap.put(year, valObj);
-		trie.insert(year, valObj);
+		trie.insert(year);
 	}
 	
 	int get(int year)
@@ -54,7 +54,6 @@ public class GetDataFromClosestYearIfNotPresent
 class TrieNode
 {
 	TrieNode[] links;
-	int valObj;
 	
 	public TrieNode()
 	{
@@ -90,7 +89,7 @@ class Trie
 		nextYear = 0;
 	}
 	
-	void insert(int year, int valObj)
+	void insert(int year)
 	{
 		TrieNode curr = root;
 		
@@ -104,7 +103,6 @@ class Trie
 			}
 			curr = curr.get(key);
 		}
-		curr.valObj = valObj;
 	}
 	
 	int search(int year)
