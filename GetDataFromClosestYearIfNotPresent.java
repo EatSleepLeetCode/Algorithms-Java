@@ -85,7 +85,7 @@ class Trie
 	public Trie()
 	{
 		root = new TrieNode();
-		prevYear = Integer.MIN_VALUE;
+		prevYear = 0;
 		nextYear = Integer.MAX_VALUE;
 	}
 	
@@ -125,14 +125,12 @@ class Trie
 			return true;
 		}
 		
-		int yearDigit = 0;
-		
+		int key = 0, yearDigit = 0;
 		if (prevDigitIsSame)
 			yearDigit = (year / (int) Math.pow(10, SIZE - 1 - index)) % 10;
 		else
 			yearDigit = dir < 0 ? 9 : 0;
-		
-		int key = yearDigit;
+		key = yearDigit;
 		
 		do
 		{
@@ -142,16 +140,12 @@ class Trie
 			if (curr.containsKey(key))
 			{
 				buildKey += key;
-				if (dfs(year, buildKey, index + 1, curr.get(key), dir, key == yearDigit))
-				{
-					return true;
-				}
+				if (dfs(year, buildKey, index + 1, curr.get(key), dir, key == yearDigit)) return true;
 				buildKey = buildKey.substring(0, buildKey.length() - 1);
 			}
 			key = (key + dir + 10) % 10;
 		}
 		while(key != yearDigit);
-
 		return false;
 	}
 }
