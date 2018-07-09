@@ -77,7 +77,7 @@ class TrieNode
 
 class Trie
 {
-	final int SIZE = 5;
+	final int SIZE = 4;
 	TrieNode root;
 	int prevYear;
 	int nextYear;
