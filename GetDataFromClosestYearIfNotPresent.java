@@ -20,11 +20,7 @@ public class GetDataFromClosestYearIfNotPresent
 	
 	int get(int year)
 	{
-		if (yearMap.containsKey(year))
-		{
-			return yearMap.get(year);
-		}
-		
+		if (yearMap.containsKey(year)) return yearMap.get(year);
 		return yearMap.get(trie.search(year));
 	}
 	
@@ -38,7 +34,9 @@ public class GetDataFromClosestYearIfNotPresent
 		obj.put(2000, 3);
 		obj.put(2010, 2);
 		obj.put(2003, 7);
+		obj.put(2090, 17);
 		
+		System.out.println(System.currentTimeMillis());
 		System.out.println(obj.get(1990));	//key exists in yearMap - return value of 1
 		System.out.println(obj.get(1993));	//Closest year is 1992 (searched via backward scan) - return 13
 		System.out.println(obj.get(1994));	//Closest year is 1996 (searched via forward scan) - return 9
@@ -46,8 +44,9 @@ public class GetDataFromClosestYearIfNotPresent
 		System.out.println(obj.get(2006));  //Closest year is 2003 (searched via backward scan) - return 7
 		System.out.println(obj.get(2007));  //Closest year is 2003 (searched via forward scan) - return 2
 		System.out.println(obj.get(2015));  //Closest year is 2003 (searched via forward scan) - return 2
-		System.out.println(obj.get(3007));  //Closest year is 2010 (searched via backward scan) - return 2
+		System.out.println(obj.get(3007));  //Closest year is 2090 (searched via forward scan) - return 17
 		System.out.println(obj.get(1007));  //Closest year is 1890 (searched via forward scan) - return 5
+		System.out.println(System.currentTimeMillis());
 	}
 }
 
@@ -78,6 +77,7 @@ class TrieNode
 
 class Trie
 {
+	final int SIZE = 5;
 	TrieNode root;
 	int prevYear;
 	int nextYear;
@@ -85,18 +85,18 @@ class Trie
 	public Trie()
 	{
 		root = new TrieNode();
-		prevYear = 0;
-		nextYear = 0;
+		prevYear = Integer.MIN_VALUE;
+		nextYear = Integer.MAX_VALUE;
 	}
 	
 	void insert(int year)
 	{
 		TrieNode curr = root;
 		
-		for (int i = 0; i < 4; i++)		//input format is YYYY, so 4 iterations
+		for (int i = 0; i < SIZE; i++)		//input format is YYYY, so SIZE i.e. 4 iterations
 		{
-			int key = year / (int) Math.pow(10, 3 - i);
-			year = year % (int) Math.pow(10, 3 - i);
+			int key = year / (int) Math.pow(10, SIZE - 1 - i);
+			year = year % (int) Math.pow(10, SIZE - 1 - i);
 			if (!curr.containsKey(key))
 			{
 				curr.put(key, new TrieNode());
@@ -107,50 +107,51 @@ class Trie
 	
 	int search(int year)
 	{
+		prevYear = 0;
+		nextYear = Integer.MAX_VALUE;
+
 		TrieNode curr = root;
-		
-		if (!dfs(year, "", 0, curr, -1)) prevYear = 0;
-		if (!dfs(year, "", 0, curr, 1)) nextYear = Integer.MAX_VALUE;
-		
+		dfs(year, "", 0, curr, -1, true);
+		dfs(year, "", 0, curr, 1, true);	//no need to reset curr because we don't update curr in DFS
 		return  ((year - prevYear) < (nextYear - year)) ? prevYear : nextYear;
 	}
 	
-	boolean dfs(int year, String buildKey, int digit, TrieNode curr, int dir)
+	boolean dfs(int year, String buildKey, int index, TrieNode curr, int dir, boolean prevDigitIsSame)
 	{
-		if (digit == 4)
+		if (index == SIZE) 
 		{
-			if (dir > 0 && Integer.parseInt(buildKey) > year)
-			{
-				nextYear = Integer.parseInt(buildKey);
-				return true;
-			}
-			if (dir < 0 && Integer.parseInt(buildKey) < year)
-			{
-				prevYear = Integer.parseInt(buildKey);
-				return true;
-			}
-			return false;
+			if (dir < 0) prevYear = Integer.parseInt(buildKey);
+			if (dir > 0) nextYear = Integer.parseInt(buildKey);
+			return true;
 		}
 		
-		for (int i = digit; i < 4; i++)
+		int yearDigit = 0;
+		
+		if (prevDigitIsSame)
+			yearDigit = (year / (int) Math.pow(10, SIZE - 1 - index)) % 10;
+		else
+			yearDigit = dir < 0 ? 9 : 0;
+		
+		int key = yearDigit;
+		
+		do
 		{
-			int key = dir < 0 ? 9 : 0;
-			
-			while (key >= 0 && key <= 9)
+			if (dir < 0 && Integer.parseInt(buildKey + key) > (year / (int) Math.pow(10, SIZE - 1 - index))) return false;
+			if (dir > 0 && Integer.parseInt(buildKey + key) < (year / (int) Math.pow(10, SIZE - 1 - index))) return false;
+				
+			if (curr.containsKey(key))
 			{
-				if (curr.containsKey(key))
+				buildKey += key;
+				if (dfs(year, buildKey, index + 1, curr.get(key), dir, key == yearDigit))
 				{
-					buildKey += key;
-					if (dfs(year, buildKey, digit + 1, curr.get(key), dir))
-					{
-						return true;
-					}
-					buildKey = buildKey.substring(0, buildKey.length() - 1);
+					return true;
 				}
-
-				key += dir;
+				buildKey = buildKey.substring(0, buildKey.length() - 1);
 			}
+			key = (key + dir + 10) % 10;
 		}
+		while(key != yearDigit);
+
 		return false;
 	}
 }
