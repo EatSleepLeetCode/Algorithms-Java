@@ -1,4 +1,7 @@
-class MinimumCostToHireKWorkers 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
+public class MinimumCostToHireKWorkers 
 {
     public double mincostToHireWorkers(int[] quality, int[] wage, int K) 
     {
@@ -28,8 +31,14 @@ class MinimumCostToHireKWorkers
         }
         return ans;
     }
-}
 
+	public static void main(String[] args) 
+	{
+		MinimumCostToHireKWorkers obj = new MinimumCostToHireKWorkers();
+		obj.mincostToHireWorkers(new int[] {10, 20, 5}, new int[] {70, 50, 30}, 2);
+	}
+}
+	
 class Worker
 {
     int quality;
@@ -46,3 +55,4 @@ class Worker
         return (double) this.wage / this.quality;
     }
 }
+
